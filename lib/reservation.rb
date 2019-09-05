@@ -1,6 +1,6 @@
 class Reservation
   
-  attr_reader :date_range, :room_number, :confirmation_id, :total_cost, :RATE
+  attr_reader :date_range, :room_number, :confirmation_id, :total_cost
   RATE = 200
   def initialize(date_range:, room_number:, confirmation_id:, total_cost:)
     @date_range = date_range

@@ -11,7 +11,7 @@ describe "Date_range class" do
     end
     
     it "is an instance of Date_range" do
-      expect(@date_range).must_be_kind_of Date_range
+      expect(@date_range).must_be_kind_of DateRange
     end
     
   end

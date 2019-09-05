@@ -1,10 +1,12 @@
 require 'pry'
+require_relative 'reservation'
+
 class Hotel
   
   attr_reader :reservation_list, :rooms
   RATE = 200
   
-  def initialize(reservation_list)
+  def initialize(reservation_list:)
     @reservation_list = reservation_list
     @rooms = (1..20).to_a
   end
@@ -23,7 +25,8 @@ class Hotel
   end
   
   # based on date range and room number, checks if room is available and returns true
-  def is_room_available(date_range, room_number)
+  def is_room_available(date_range:, room_number:)
+    # binding.pry
     room_match = @reservation_list.select {| reservation| reservation.room_number == room_number && reservation.date_range.check_out  > date_range.check_in && reservation.date_range.check_in <= date_range.check_out} 
     if room_match.length > 0
       return false
@@ -32,7 +35,7 @@ class Hotel
     end
   end
   
-  def track_reservation(date)
+  def track_reservation(date:)
     # room match return for dates
     
     # I can access the list of reservations for a specific date, so that I can track reservations by date
