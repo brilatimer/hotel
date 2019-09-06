@@ -18,7 +18,7 @@ class Hotel
     # If no rooms found in the loop, return 
     
     # Loop through rooms until one is available
-    new_reservation = Reservation.new(date_range: date_range, room_number: nil, confirmation_id: nil, total_cost: nil)
+    new_reservation = Reservation.new(date_range: date_range, room_number: nil, confirmation_id: nil, cost: nil)
     @reservation_list << new_reservation 
   end
   

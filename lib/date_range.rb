@@ -6,7 +6,9 @@ class DateRange
     @check_in = check_in
     @check_out = check_out
     
-    # I want exception raised when an invalid date range is provided, so that I can't make a reservation for an invalid date range
+    if check_out < check_in || check_in == check_out
+      raise Exception.new("Invalid date range provided; reservation cannot be made")
+    end
   end
 end
 

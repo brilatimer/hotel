@@ -1,5 +1,3 @@
-require 'simplecov'
-SimpleCov.start
 require_relative 'test_helper'
 require 'date'
 
@@ -16,7 +14,7 @@ describe "Hotel class" do
   # create hotel with 1 reservation
   describe "is room available method" do 
     let(:date_range) { DateRange.new(check_in: Date.new(2019, 9, 10), check_out: Date.new(2019, 9, 15)) }
-    let(:reservation) { Reservation.new(date_range: date_range, room_number: 1, confirmation_id: nil, total_cost: nil) }
+    let(:reservation) { Reservation.new(date_range: date_range, room_number: 1, confirmation_id: nil, cost: nil) }
     let(:hotel) { Hotel.new(reservation_list:[reservation]) }
     
     it "is room available to book when there are no bookings" do 
@@ -42,11 +40,11 @@ describe "Hotel class" do
   
   # create method for 'track_reservation' using 3 sample given date ranges
   describe "track_reservation for given date method" do
-    let(:reservation1) { Reservation.new(date_range: DateRange.new(check_in: Date.new(2019, 9, 8), check_out: Date.new(2019, 9, 11)), room_number: nil, confirmation_id: nil, total_cost: nil) }
+    let(:reservation1) { Reservation.new(date_range: DateRange.new(check_in: Date.new(2019, 9, 8), check_out: Date.new(2019, 9, 11)), room_number: nil, confirmation_id: nil, cost: nil) }
     
-    let(:reservation2) { Reservation.new(date_range: DateRange.new(check_in: Date.new(2019, 9, 5), check_out: Date.new(2019, 9, 10)), room_number: nil , confirmation_id: nil, total_cost: nil) }
+    let(:reservation2) { Reservation.new(date_range: DateRange.new(check_in: Date.new(2019, 9, 5), check_out: Date.new(2019, 9, 10)), room_number: nil , confirmation_id: nil, cost: nil) }
     
-    let(:reservation3) { Reservation.new(date_range: DateRange.new(check_in: Date.new(2019, 9, 12), check_out: Date.new(2019, 9, 16)), room_number: nil, confirmation_id: nil, total_cost: nil) }
+    let(:reservation3) { Reservation.new(date_range: DateRange.new(check_in: Date.new(2019, 9, 12), check_out: Date.new(2019, 9, 16)), room_number: nil, confirmation_id: nil, cost: nil) }
     
     let(:hotel) { Hotel.new(reservation_list: [reservation1, reservation2, reservation3])}
     
