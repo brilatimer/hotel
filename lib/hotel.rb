@@ -1,8 +1,6 @@
 require 'pry'
 require_relative 'reservation'
-
 class Hotel
-  
   attr_reader :reservation_list, :rooms
   RATE = 200
   
@@ -34,12 +32,13 @@ class Hotel
     end
   end
   
+  # I can access the list of reservations for a specific date, so that I can track reservations by date
   def track_reservation(date:)
-    # room match return for dates
-    
-    # I can access the list of reservations for a specific date, so that I can track reservations by date
-    # Use .select to find reservations for a specific date
-    return []# list of reservations for given date
+    track_reservation_by_date = @reservation_list.select {| reservation |date >= reservation.date_range.check_in && date <= reservation.date_range.check_out}
+    return track_reservation_by_date  # reservations array for a given date
   end
   
 end
+
+
+
