@@ -9,9 +9,12 @@ class Hotel
     @rooms = (1..20).to_a
   end
   
-  # "I can make a reservation of a room for a given date range + no overlap (Wave 2.2)"
+  # "I can make a reservation of a room for a given date range + no overlap, exception (Wave 2.2-3)"
   def make_reservation(date_range:)
     room_number_options = available_rooms(date_range: date_range) 
+    if room_number_options.length == 0
+      raise ArgumentError.new "SOLD OUT: Requested reservation cannot be made. Please try another date."
+    end 
     new_reservation = Reservation.new(date_range: date_range, room_number: room_number_options.first)
     @reservation_list << new_reservation 
   end

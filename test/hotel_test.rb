@@ -49,6 +49,14 @@ describe "Hotel class" do
       hotel.make_reservation(date_range: date_range)
       expect(hotel.reservation_list.first).must_be_kind_of Reservation
     end
+    
+    # Wave 2.3 Exception for overlapping reservation
+    it "raises an exception when a reservation is being made that overlaps with current reservation dates for all room" do 
+      20.times do
+        hotel.make_reservation(date_range: date_range)
+      end  
+      expect(hotel.make_reservation(date_range: date_range)).must_raise ArgumentError
+    end
   end
   
   # create method for 'track_reservation' using 3 sample given date ranges
