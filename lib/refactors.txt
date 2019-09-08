@@ -1,0 +1,11 @@
+Directions: 
+In that file, make a short list of the changes that you could make, such as naming conventions, etc.
+
+2.2 track_res_by_date vs track_reservation (in order to remember this tracking is done by date. Alternatively: date_res_search)
+2.1 avil_rooms_by_date vs available_rooms
+2.2-2.3 room_number_options could be made more clear 
+
+could any methods be further consolidated to make more succinct?
+
+
+
