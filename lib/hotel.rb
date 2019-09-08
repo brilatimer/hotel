@@ -1,15 +1,14 @@
-require 'pry'
 require_relative 'reservation'
 class Hotel
   attr_reader :reservation_list, :rooms
-  RATE = 200
+  RATE = 200 # create constant, as rate will not change or if it does, it can be adjusted here
   
   def initialize(reservation_list:)
     @reservation_list = reservation_list
-    @rooms = (1..20).to_a
+    @rooms = (1..20).to_a # array of rooms - room count can be updated in future
   end
   
-  # "I can make a reservation of a room for a given date range + no overlap, exception (Wave 2.2-3)"
+  # "I can make a reservation of a room for a given date range + no overlap, instate exception (Wave 2.2-3)"
   def make_reservation(date_range:)
     room_number_options = available_rooms(date_range: date_range) 
     if room_number_options.length == 0
@@ -20,7 +19,7 @@ class Hotel
   end
   
   # based on date range and room number, checks if room is available and returns true
-  # protect against overlap on both sides of given reservation
+  # protect against overlap on both sides (before check-in and after check-out) of given reservation
   def is_room_available(date_range:, room_number:)
     room_match = @reservation_list.select {| reservation|reservation.room_number == room_number && ((date_range.check_out <= reservation.date_range.check_out && date_range.check_out > reservation.date_range.check_in) || (date_range.check_in < reservation.date_range.check_out && date_range.check_in >= reservation.date_range.check_in))}
     if room_match.length > 0
@@ -38,7 +37,7 @@ class Hotel
         available_rooms_list << room_number # puts available rooms into available_rooms_list
       end
     end
-    return available_rooms_list
+    return available_rooms_list # see all rooms availablef or given date range
   end
   
   # I can access the list of reservations for a specific date, so that I can track reservations by date

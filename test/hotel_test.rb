@@ -1,17 +1,17 @@
 require_relative 'test_helper'
 require 'date'
 
-# confirm that Hotel class exists
 describe "Hotel class" do
   describe "Hotel instantiation" do
     let(:hotel) { Hotel.new(reservation_list: []) }
-    
+
+    # confirm that Hotel class exists
     it "is an instance of Hotel" do
       expect(hotel).must_be_kind_of Hotel
     end 
   end
   
-  # create hotel with 1 reservation
+  # create hotel with 1 reservation test
   describe "is room available method" do 
     let(:date_range) { DateRange.new(check_in: Date.new(2019, 9, 10), check_out: Date.new(2019, 9, 15)) }
     let(:reservation) { Reservation.new(date_range: date_range, room_number: 1) }
@@ -21,7 +21,7 @@ describe "Hotel class" do
       expect(hotel.is_room_available(date_range: date_range, room_number: 2)).must_equal true
     end
     
-    # Edge Cases
+    # Edge Cases: prevent overlap, before, during, after test reservation
     it "is room available to book when there are previously held bookings" do 
       expect(hotel.is_room_available(date_range: date_range, room_number: 1)).must_equal false 
     end
@@ -50,8 +50,8 @@ describe "Hotel class" do
       expect(hotel.reservation_list.first).must_be_kind_of Reservation
     end
     
-    # Wave 2.3 Exception for overlapping reservation
-    it "raises an exception when a reservation is being made that overlaps with current reservation dates for all room" do 
+    # Wave 2.3 Exception for overlapping reservation. Loop through all 20 rooms to simulate fully booked hotel, raise exception
+    it "raises an exception when a reservation is being made that overlaps with current reservation dates for all rooms" do 
       20.times do
         hotel.make_reservation(date_range: date_range)
       end  

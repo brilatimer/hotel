@@ -1,5 +1,4 @@
 class DateRange
-  
   attr_reader :check_in, :check_out
   
   def initialize(check_in:, check_out:)
@@ -13,5 +12,3 @@ class DateRange
 end
 
 
-
-# open coverage/index.html to open pretty test
