@@ -9,22 +9,16 @@ class Hotel
     @rooms = (1..20).to_a
   end
   
-  # "I can make a reservation of a room for a given date range"
+  # "I can make a reservation of a room for a given date range + no overlap (Wave 2.2)"
   def make_reservation(date_range:)
-    # Wave 2:
-    # Loop through all @rooms  
-    # Check if a room number is_room_available
-    # Break out of loop if a room is available
-    # If no rooms found in the loop, return 
-    
-    # Loop through rooms until one is available
-    new_reservation = Reservation.new(date_range: date_range, room_number: nil, confirmation_id: nil, cost: nil)
+    room_number_options = available_rooms(date_range: date_range) 
+    new_reservation = Reservation.new(date_range: date_range, room_number: room_number_options.first)
     @reservation_list << new_reservation 
   end
   
   # based on date range and room number, checks if room is available and returns true
   # protect against overlap on both sides of given reservation
-  def is_room_available(date_range: date_range, room_number: room_number)
+  def is_room_available(date_range:, room_number:)
     room_match = @reservation_list.select {| reservation|reservation.room_number == room_number && ((date_range.check_out <= reservation.date_range.check_out && date_range.check_out > reservation.date_range.check_in) || (date_range.check_in < reservation.date_range.check_out && date_range.check_in >= reservation.date_range.check_in))}
     if room_match.length > 0
       return false
