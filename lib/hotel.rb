@@ -23,7 +23,7 @@ class Hotel
   end
   
   # based on date range and room number, checks if room is available and returns true
-  def is_room_available(date_range:, room_number:)
+  def is_room_available(date_range: date_range, room_number: room_number)
     room_match = @reservation_list.select {| reservation|reservation.room_number == room_number && reservation.date_range.check_out  > date_range.check_in && reservation.date_range.check_in <= date_range.check_out} 
     if room_match.length > 0
       return false
@@ -31,13 +31,23 @@ class Hotel
       return true
     end
   end
+
+  # Wave 2.1 create method to view a list of rooms that are not reserved for a given date range, so that I can see all available rooms for that day
+  def available_rooms(date_range:)
+    available_rooms_list = []
+    @rooms.each do |room_number| # loops through all 20 rooms to check availability
+      if is_room_available(date_range: date_range, room_number: room_number) == true
+        available_rooms_list << room_number # puts available rooms into available_rooms_list
+      end
+    end
+    return available_rooms_list
+  end
   
   # I can access the list of reservations for a specific date, so that I can track reservations by date
   def track_reservation(date:)
     track_reservation_by_date = @reservation_list.select {| reservation |date >= reservation.date_range.check_in && date <= reservation.date_range.check_out}
     return track_reservation_by_date  # reservations array for a given date
   end
-  
 end
 
 

@@ -21,8 +21,21 @@ describe "Hotel class" do
       expect(hotel.is_room_available(date_range: date_range, room_number: 2)).must_equal true
     end
     
+    # Edge Cases
     it "is room available to book when there are previously held bookings" do 
       expect(hotel.is_room_available(date_range: date_range, room_number: 1)).must_equal false 
+    end
+    
+    it "test date range before room is booked " do 
+      expect(hotel.is_room_available(date_range: DateRange.new(check_in: Date.new(2019, 9, 7), check_out: Date.new(2019, 9, 12)))).must_equal true 
+    end
+    
+    it "test date range during the room booking " do 
+      expect(hotel.is_room_available(date_range: DateRange.new(check_in: Date.new(2019, 9, 11), check_out: Date.new(2019, 9, 14)))).must_equal false 
+    end
+    
+    it "test date range after the room checks out " do 
+      expect(hotel.is_room_available(date_range: DateRange.new(check_in: Date.new(2019, 9, 12), check_out: Date.new(2019, 9, 16)))).must_equal true 
     end
   end
   
@@ -54,6 +67,19 @@ describe "Hotel class" do
     end
   end
   
-  # create a method for 'is_room_available'
+  describe "available rooms method" do 
+    let(:reservation1) { Reservation.new(date_range: DateRange.new(check_in: Date.new(2019, 9, 9), check_out: Date.new(2019, 9, 11)), room_number: 1, confirmation_id: nil, cost: nil) }
+    
+    let(:reservation2) { Reservation.new(date_range: DateRange.new(check_in: Date.new(2019, 9, 9), check_out: Date.new(2019, 9, 11)), room_number: 2 , confirmation_id: nil, cost: nil) }
+    
+    let(:reservation3) { Reservation.new(date_range: DateRange.new(check_in: Date.new(2019, 9, 10), check_out: Date.new(2019, 9, 15)), room_number: 3, confirmation_id: nil, cost: nil) }
+    
+    let(:hotel) { Hotel.new(reservation_list: [reservation1, reservation2, reservation3])}
+    
+    it "can see available rooms for a given date range that are not reserved" do 
+      expect(hotel.available_rooms(date_range: DateRange.new(check_in: Date.new(2019, 9, 9), check_out: Date.new(2019, 9, 11)))).must_be_kind_of Array
+      expect(hotel.available_rooms(date_range: DateRange.new(check_in: Date.new(2019, 9, 8), check_out: Date.new(2019, 9, 10))).length).must_equal 18
+    end
+  end
 end
 
