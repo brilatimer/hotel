@@ -4,7 +4,7 @@ require 'date'
 describe "Hotel class" do
   describe "Hotel instantiation" do
     let(:hotel) { Hotel.new(reservation_list: []) }
-
+    
     # confirm that Hotel class exists
     it "is an instance of Hotel" do
       expect(hotel).must_be_kind_of Hotel
