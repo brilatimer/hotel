@@ -27,15 +27,15 @@ describe "Hotel class" do
     end
     
     it "test date range before room is booked " do 
-      expect(hotel.is_room_available(date_range: DateRange.new(check_in: Date.new(2019, 9, 7), check_out: Date.new(2019, 9, 12)))).must_equal true 
+      expect(hotel.is_room_available(date_range: DateRange.new(check_in: Date.new(2019, 9, 7), check_out: Date.new(2019, 9, 10)),room_number: 1 )).must_equal true 
     end
     
     it "test date range during the room booking " do 
-      expect(hotel.is_room_available(date_range: DateRange.new(check_in: Date.new(2019, 9, 11), check_out: Date.new(2019, 9, 14)))).must_equal false 
+      expect(hotel.is_room_available(date_range: DateRange.new(check_in: Date.new(2019, 9, 11), check_out: Date.new(2019, 9, 14)),room_number: 1 )).must_equal false 
     end
     
     it "test date range after the room checks out " do 
-      expect(hotel.is_room_available(date_range: DateRange.new(check_in: Date.new(2019, 9, 12), check_out: Date.new(2019, 9, 16)))).must_equal true 
+      expect(hotel.is_room_available(date_range: DateRange.new(check_in: Date.new(2019, 9, 15), check_out: Date.new(2019, 9, 16)), room_number: 1 )).must_equal true 
     end
   end
   
