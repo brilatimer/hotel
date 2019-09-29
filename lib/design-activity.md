@@ -1,3 +1,4 @@
+- SHOPPING CART PROMPTS - 
 What classes does each implementation include? Are the lists the same?
 Implementation A:CartEntry, ShoppingCart, Order
 Implementation B:CartEntry, ShoppingCart, Order 
@@ -40,3 +41,8 @@ Implementation B
 
 Bonus question once you've read Metz ch. 3: Which implementation is more loosely coupled?
 Implementation B
+
+- HOTEL PROMPTS - 
+
+Class Daterange stores check in and check out, raising an exception if the date selection is invalid.
+In Reservation class, cost is calculated using the difference between check out and check in. Instead, it should be done using an new method in DateRange (nights_booked).  

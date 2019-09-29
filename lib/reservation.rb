@@ -8,7 +8,7 @@ class Reservation
   end
   
   def total_cost
-    total_cost = (@date_range.check_out - @date_range.check_in) * (RATE) # calculate number of nights, multiply by set constant RATE
+    total_cost = (@date_range.nights_booked) * (RATE) # calculate number of nights, multiply by set constant RATE
     return total_cost.to_i
   end
 end

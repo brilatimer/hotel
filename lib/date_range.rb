@@ -9,6 +9,10 @@ class DateRange
       raise Exception.new("Invalid date range provided; reservation cannot be made")
     end
   end
+  
+  def nights_booked
+    return @check_out - @check_in 
+  end
 end
 
 
